@@ -3,6 +3,12 @@
 // 打开设置界面时触发
 import {SettingListeners} from "./utils/SettingListeners.js";
 
+let loader;
+
+export function onLoad(api) {
+    loader = api;
+}
+
 export const onSettingWindowCreated = async view => {
     // view 为 Element 对象，修改将同步到插件设置界面
     // 这个函数导出之后在QQ设置里面可以直接看见插件页面
@@ -14,7 +20,7 @@ export const onSettingWindowCreated = async view => {
             .parseFromString(await window.change_summary.getMenuHTML(), "text/html")
             .querySelector("change-summary-plugin-menu")
 
-        const myListener = new SettingListeners(settingHTML)
+        const myListener = new SettingListeners(settingHTML, loader)
         myListener.onLoad()
         view.appendChild(settingHTML);
 

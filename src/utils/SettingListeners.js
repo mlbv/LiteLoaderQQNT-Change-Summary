@@ -3,11 +3,13 @@ import {pluginLog} from "./frontendLogUtils.js";
 const csAPI = window.change_summary
 
 export class SettingListeners {
-    constructor(doc) {//传入一个document对象
+    constructor(doc, api) {//传入一个document对象
         this.document = doc
+        this.api = api
     }
 
     async initListener() {
+        const api = this.api;
         let picValue, memeValue, isPicOTuseRandom, isMemeOTuseRandom, rmApiValue, rmApiKeyValue;
 
         const config = await csAPI.getConfig()
@@ -115,39 +117,40 @@ export class SettingListeners {
             pluginLog(`修改随机文本API失败回退文本为 ${fallbackValue}`);
         });
 
-        // 仓库按钮
+        const manifest = api.plugins.change_summary.manifest;
         this.document.querySelector('#cs-gh-btn')
-            .addEventListener('click', () => LiteLoader.api.openExternal(
-                'https://github.com/WJZ-P/LiteLoaderQQNT-Change-Summary'
+            .addEventListener('click', () => api.api.openExternal(
+                `https://github.com/${manifest.repository.repo}`
             ));
 
-        // 版本信息
-        this.document.querySelector('#cs-version')
-            .innerHTML = `当前版本 v${LiteLoader.plugins.change_summary.manifest.version}`;
-
-        // 检查更新
-        this.document.querySelector('#cs-check-update')
-            .addEventListener('click', async(e) => {
-                let that = e.target.parentNode;
-                const req = await fetch(
-                    'https://api.github.com/repos/WJZ-P/LiteLoaderQQNT-Change-Summary/releases/latest'
-                );
-                const res = await req.json();
-                const current = LiteLoader.plugins.change_summary.manifest.version.split('.');
-                const latest = res.tag_name.replace('v', '').split('.');
-                for(let i in current) {
-                    if(current[i] < latest[i]) {
-                        that.querySelector('#cs-version')
-                            .innerHTML = `当前版本 v${current.join('.')} 发现新版本 ${res.tag_name}`;
-                        that.querySelector('#cs-check-update')
-                            .innerHTML = '立即更新';
-                        that.querySelector('#cs-check-update')
-                            .addEventListener('click', () => LiteLoader.api.openExternal(res.html_url));
-                        break;
-                    } else that.querySelector('#cs-check-update')
-                            .innerHTML = '暂未发现';
-                }
-            });
+        const versionLabel = this.document.querySelector('#cs-version');
+        versionLabel.textContent = `当前版本 v${manifest.version}`;
+        const updateButton = this.document.querySelector('#cs-check-update');
+        let releaseUrl;
+        updateButton.addEventListener('click', async () => {
+            if (releaseUrl) {
+                api.api.openExternal(releaseUrl);
+                return;
+            }
+            const req = await fetch(
+                `https://api.github.com/repos/${manifest.repository.repo}/releases/latest`
+            );
+            if (!req.ok) {
+                updateButton.textContent = req.status === 404 ? '暂无发行版' : '检查失败';
+                return;
+            }
+            const res = await req.json();
+            const current = manifest.version.split('.').map(Number);
+            const latest = res.tag_name.replace(/^v/, '').split('.').map(Number);
+            const difference = latest.findIndex((part, index) => part !== current[index]);
+            if (difference !== -1 && latest[difference] > current[difference]) {
+                versionLabel.textContent = `当前版本 v${manifest.version} 发现新版本 ${res.tag_name}`;
+                updateButton.textContent = '立即更新';
+                releaseUrl = res.html_url;
+            } else {
+                updateButton.textContent = '暂未发现';
+            }
+        });
     }
 
     onLoad() {

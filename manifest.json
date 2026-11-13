@@ -1,10 +1,11 @@
 {
   "manifest_version": 4,
+  "api": "PhantomLoader",
   "type": "extension",
   "name": "修改图片概要",
   "slug": "change_summary",
   "description": "修改图片/表情包外显消息(未进入群聊时在外部看见的简略文本)（＾∀＾）",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "icon": "./src/assests/icon.svg",
   "thumb": "./src/assests/icon.svg",
   "authors": [
@@ -24,11 +25,11 @@
     "preload": "./src/preload.js"
   },
   "repository": {
-    "repo": "WJZ-P/LiteLoaderQQNT-Change-Summary",
+    "repo": "mlbv/LiteLoaderQQNT-Change-Summary",
     "branch": "main",
     "release": {
-      "tag": "v3.0.0",
-      "file": "Change-Summary-3.0.0.zip"
+      "tag": "v4.0.0",
+      "file": "Change-Summary-4.0.0.zip"
     }
   }
 }

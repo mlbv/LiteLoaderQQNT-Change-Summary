@@ -1,142 +1,25 @@
-## 实现图片+表情包的外显缩略文本修改功能
+# Change Summary
 
-<!-- PROJECT SHIELDS -->
+[PhantomLoaderQQNT](https://github.com/mlbv/PhantomLoaderQQNT) 插件，用于修改发送图片、表情包和商城表情时的外显概要文本。
 
+## 安装
 
+安装 PhantomLoaderQQNT 后，从[本仓库的 Releases](https://github.com/mlbv/LiteLoaderQQNT-Change-Summary/releases) 下载插件压缩包，在加载器设置中导入，重启 QQ。
 
-<p align="center" style="margin-left: 50%">
+从源码安装时，将包含 `manifest.json` 和 `src` 的插件目录放到当前加载器配置目录的 `plugins/change_summary` 下，再通过 PhantomLoaderQQNT 启动器启动 QQ。
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+## 使用
 
-</p>
+打开插件设置，分别填写图片和表情包的外显文本。商城表情使用表情包的设置。
 
-<!-- PROJECT LOGO -->
+图片和表情包可以分别启用随机文本。开启后，插件向设置中的 API 地址请求 JSON，并读取指定键值作为外显文本；默认使用[一言 API](https://v1.hitokoto.cn/) 的 `hitokoto` 字段。请求和文本修改完成后，消息按原有顺序继续发送。
 
-<p align="center">
-  <a href="https://github.com/WJZ-P/LiteLoaderQQNT-Change-Summary">
-    <img src="src/assests/icon.svg" alt="Logo" width="150" height="150" style="color: #66ccff;margin: 0">
-  </a>
-  <h1 align="center">Change Summary</h1>
-  <p align="center">
-    <a href="https://github.com/WJZ-P/LiteLoaderQQNT-Change-Summary">查看Demo</a>
-    ·
-    <a href="https://github.com/WJZ-P/LiteLoaderQQNT-Change-Summary/issues">报告Bug</a>
-    ·
-    <a href="https://github.com/WJZ-P/LiteLoaderQQNT-Change-Summary/issues">提出新特性</a>
-  </p>
-</p>
+设置保存在插件目录的 `config.json` 中，修改后即时生效。
 
-<p align="center">
-  <a href="https://www.bilibili.com/video/BV1Zs411z79y">
-    <img src="src/assests/markdown/尘降.jpg" alt="尘降">
-  </a>
-</p>
-<h2 align="center">"若你能命中我
-自宇宙的中央
-镜片里能不能
-留下我的模样"
-</h2>
+![设置界面](src/assests/markdown/instuction.png)
 
-## 目录
+## 作者与许可
 
-- [Change Summary](#change-summary)
-    - [目录](#目录)
-        - [上手指南](#上手指南)
-            - [开发前的配置要求](#开发前的配置要求)
-            - [**插件安装步骤**](#安装步骤)
-        - [**使用方法**](#使用方法)
-        - [版权说明](#版权说明)
-        - [鸣谢](#鸣谢)
+本项目基于 [WJZ_P 的 LiteLoaderQQNT-Change-Summary](https://github.com/WJZ-P/LiteLoaderQQNT-Change-Summary)。随机外显功能由 XiaozhiSans（小只杉斯）实现，感谢上游作者、贡献者和 [LiteLoaderQQNT](https://github.com/LiteLoaderQQNT/LiteLoaderQQNT) 项目。
 
-## 上手指南
-
-###### 开发前的配置要求
-
-1. 请安装LiteLoader，项目地址为 https://github.com/LiteLoaderQQNT/LiteLoaderQQNT
-
-2. 下面是社区开发的LiteLoader快捷安装脚本项目，新手请直接下载下面的即可。
-   https://github.com/Mzdyl/LiteLoaderQQNT_Install/
-
-#### 此处提供两个链接：
-
-- [LiteLoader QQNT 下载地址](https://github.com/LiteLoaderQQNT/LiteLoaderQQNT/releases)
-- [LiteLoader QQNT 安装脚本](https://github.com/Mzdyl/LiteLoaderQQNT_Install/releases)
-
-#### 对于网络不好的用户，可以使用以下直链进行下载：
-
-- [LiteLoader QQNT 安装器直链][LL-installer-link]
-- [QQ9.9.15.26909_x64 版本直链][oldQQ-download-link]
-
-###### 安装步骤
-
-1. 下载release中的最新版本
-2. 解压后把整个解压出来的文件夹拖动到Plugins目录下即可。
-3. 重启QQ，LiteLoader会自动加载插件。
-
-### 注意，如果使用了上面的install脚本安装liteloader，QQ设置会自带插件商店，在插件商店里可以一键安装本插件。
-
-# 使用方法
-
-### 进入设置界面，输入你想要显示的外显文本即可。支持自定义API
-
-<p align="center">
-  <a>
-    <img src="src/assests/markdown/instuction.png" alt="聊天界面" style="width: 600px">
-  </a>
-</p>
-
-## 📝 To Do List
-
-- [x] **使用一言API实现随机外显功能** (已由**XiaozhiSans 小只杉斯**实现)
-   - [x] 或者让用户自己填个文本API什么的。
-
-## 版权说明
-
-该项目签署了EPL-2.0 license
-授权许可，详情请参阅 [LICENSE](https://github.com/WJZ-P/LiteLoaderQQNT-Change-Summary/blob/main/LICENSE)
-
-## 鸣谢
-
-- [LiteLoader QQNT](https://github.com/LiteLoaderQQNT/LiteLoaderQQNT?tab=readme-ov-file)
-
-
-## 如果您喜欢本项目，请给我点个⭐吧(๑>◡<๑)！
-
-## ⭐ Star 历史
-
-[![Stargazers over time](https://starchart.cc/WJZ-P/LiteLoaderQQNT-Change-Summary.svg?variant=adaptive)](https://starchart.cc/WJZ-P/LiteLoaderQQNT-Change-Summary)
-<!-- links -->
-
-[contributors-shield]: https://img.shields.io/github/contributors/WJZ-P/LiteLoaderQQNT-Change-Summary.svg?style=flat-square
-
-[contributors-url]: https://github.com/WJZ-P/LiteLoaderQQNT-Change-Summary/graphs/contributors
-
-[forks-shield]: https://img.shields.io/github/forks/WJZ-P/LiteLoaderQQNT-Change-Summary.svg?style=flat-square
-
-[forks-url]: https://github.com/WJZ-P/LiteLoaderQQNT-Change-Summary/network/members
-
-[stars-shield]: https://img.shields.io/github/stars/WJZ-P/LiteLoaderQQNT-Change-Summary.svg?style=flat-square
-
-[stars-url]: https://github.com/WJZ-P/LiteLoaderQQNT-Change-Summary/stargazers
-
-[issues-shield]: https://img.shields.io/github/issues/WJZ-P/LiteLoaderQQNT-Change-Summary.svg?style=flat-square
-
-[issues-url]: https://img.shields.io/github/issues/WJZ-P/LiteLoaderQQNT-Change-Summary.svg
-
-[license-shield]: https://img.shields.io/github/license/WJZ-P/LiteLoaderQQNT-Change-Summary.svg?style=flat-square
-
-[license-url]: https://github.com/WJZ-P/LiteLoaderQQNT-Change-Summary/blob/main/LICENSE
-
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-
-[linkedin-url]: https://linkedin.com/in/shaojintian
-
-[oldQQ-download-link]:https://ats-prod.oss-accelerate.aliyuncs.com/91ff35732557ef7d8415050a85973801
-
-[LL-installer-link]:https://ats-prod.oss-accelerate.aliyuncs.com/18734247705198dcb594916e8ba1facc
-
+采用 [EPL-2.0 许可证](LICENSE)。问题与建议请提交到[本仓库 Issues](https://github.com/mlbv/LiteLoaderQQNT-Change-Summary/issues)。
